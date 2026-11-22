@@ -1,7 +1,7 @@
 #pragma once
 #ifndef WARNE_ALGORITHMS_H
 #define WARNE_ALGORITHMS_H
-
+ 
 #include <cstddef>
 #include <stdexcept>
 #include <vector>
