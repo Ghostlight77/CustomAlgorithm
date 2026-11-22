@@ -1,7 +1,8 @@
 #include <iostream>
+#include <stdexcept>
 #include <string>
 #include <vector>
-#include "header.h"
+#include "algorithms.h"
 
 using namespace std;
 
@@ -14,49 +15,35 @@ void display_vector(const vector<T>& items) {
 }
 
 int main() {
-	cout << "CUSTOM SEARCH AND SORT LIBRARY!!\n";
+	cout << "CUSTOM SEARCH, SORT, AND COLLECTION LIBRARY!!\n\n";
 
-	vector<int> numbers = {29, 10, 15, 32, 44};
-
-	cout << "Original numbers: ";
+	vector<int> numbers = {29, 10, 15, 32, 44, 10, 32, 10};
+	cout << "Numbers: ";
 	display_vector(numbers);
 
-	cout << "LINEAR SEARCH\n";
+	int target_num = 10;
+	cout << "Occurrences of " << target_num << ": "
+	     << count_occurrences(numbers, target_num) << "\n";
+	cout << "Occurrences of 99: "
+	     << count_occurrences(numbers, 99) << "\n";
+	cout << "Max number: " << find_max(numbers) << "\n\n";
 
-	int target = 10;
+	vector<string> words = {"apple", "banana", "apple", "cherry", "banana", "apple"};
+	cout << "Words: ";
+	display_vector(words);
 
-	if (linear_search(numbers, target)) {
-		cout << target << " was FOUND!!!!!!!\n";
-	} else {
-		cout << target << " not found\n";
+	string target_word = "apple";
+	cout << "Occurrences of \"" << target_word << "\": "
+	     << count_occurrences(words, target_word) << "\n";
+	cout << "Max word (lexicographical): " << find_max(words) << "\n\n";
+
+	vector<int> empty_nums;
+	cout << "Testing find_max on an empty vector:\n";
+	try {
+		cout << find_max(empty_nums) << "\n";
+	} catch (const out_of_range& e) {
+		cout << "Caught expected exception: " << e.what() << "\n";
 	}
-
-	cout << "SELECTION SORT\n";
-
-	selection_sort(numbers);
-
-	cout << "Sorted numbers: ";
-	display_vector(numbers);
-
-	cout << "\nBINARY SEARCH\n";
-
-	target = 22;
-
-	cout << target << (binary_search_custom(numbers, target) ? " was found\n" : " was not found\n");
-
-	vector<string> names = {"Casey", "BJ", "Brandon", "Amber"};
-
-	cout << "\nOriginal names: ";
-	display_vector(names);
-
-	cout << "Linear search for BJ: " << (linear_search(names, string("BJ")) ? "was found\n" : "was not found\n");
-
-	selection_sort(names);
-
-	cout << "Sorted names: ";
-	display_vector(names);
-
-	cout << "Binary search for Rachel: " << (binary_search_custom(names, string("Rachel")) ? "was found\n" : "was not found\n");
 
 	return 0;
 }
