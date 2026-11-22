@@ -1,8 +1,9 @@
 #pragma once
-#ifndef WARNE_HEADER_H
-#define WARNE_HEADER_H
+#ifndef WARNE_ALGORITHMS_H
+#define WARNE_ALGORITHMS_H
 
 #include <cstddef>
+#include <stdexcept>
 #include <vector>
 
 template <typename T>
@@ -15,7 +16,6 @@ bool linear_search(const std::vector<T>& items, const T& target) {
 	return false;
 }
 
-// Binary search: vector must already be sorted before use
 template <typename T>
 bool binary_search_custom(const std::vector<T>& items, const T& target) {
 	std::size_t left = 0;
@@ -40,20 +40,44 @@ void selection_sort(std::vector<T>& items) {
 	for (std::size_t i = 0; i < items.size(); i++) {
 		std::size_t min_index = i;
 
-		// Find the smallest element remaining in the unsorted portion
 		for (std::size_t j = i + 1; j < items.size(); j++) {
 			if (items[j] < items[min_index]) {
 				min_index = j;
 			}
 		}
 
-		// Swap the smallest element into position
 		if (min_index != i) {
 			T temp = items[i];
 			items[i] = items[min_index];
 			items[min_index] = temp;
 		}
 	}
+}
+
+template <typename T>
+std::size_t count_occurrences(const std::vector<T>& items, const T& target) {
+	std::size_t count = 0;
+	for (const T& item : items) {
+		if (item == target) {
+			count++;
+		}
+	}
+	return count;
+}
+
+template <typename T>
+T find_max(const std::vector<T>& items) {
+	if (items.empty()) {
+		throw std::out_of_range("find_max: cannot find maximum of an empty vector");
+	}
+
+	T max_val = items[0];
+	for (std::size_t i = 1; i < items.size(); i++) {
+		if (items[i] > max_val) {
+			max_val = items[i];
+		}
+	}
+	return max_val;
 }
 
 #endif
