@@ -35,7 +35,7 @@ int main() {
 	string target_word = "apple";
 	cout << "Occurrences of \"" << target_word << "\": "
 	     << count_occurrences(words, target_word) << "\n";
-	cout << "Max word (lexicographical): " << find_max(words) << "\n\n";
+	cout << "Max word: " << find_max(words) << "\n\n";
 
 	vector<int> empty_nums;
 	cout << "Testing find_max on an empty vector:\n";
